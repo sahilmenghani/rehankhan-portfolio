@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en" data-accent="crimson" data-motion="full">
+  <head>
+    <link rel="icon" type="/images/2.jpeg" href="/images/2.jpeg" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio 2026 — Video Editor</title>
+    <meta
+      name="description"
+      content="Portfolio 2025 / 2026 — video editor and visual storyteller. Selected video work, about and contact."
+    />
+    <meta name="theme-color" content="#02050b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Optional fonts. If offline, the CSS falls back to Impact / Arial Narrow / system fonts. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#work">Skip to video projects</a>
+
+    <!-- ============ FIXED NAVIGATION ============ -->
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Back to top">
+        <span class="brand-mark" aria-hidden="true">RK</span>
+      </a>
+      <nav class="pill-nav" aria-label="Page sections">
+        <a href="#home" data-section="home" class="is-active">Home</a>
+        <a href="#about" data-section="about">About</a>
+
+        <a href="#work" data-section="work">Work</a>
+        <a href="#contact" data-section="contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ 1. HERO ============ -->
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="screen">
+          <div class="hero-row">
+            <div class="portrait" id="portrait">
+              <!-- Replace with your own portrait: assets/images/portrait.jpg -->
+              <img
+                src="/images/2.jpeg"
+                alt="Portrait of the video editor"
+                width="520"
+                height="520"
+              />
+              <span class="portrait-fallback" aria-hidden="true"
+                >YOUR PHOTO<br /><small>/images/1.jpeg</small></span
+              >
+            </div>
+
+            <div class="title-wrap">
+              <h1 id="hero-title" class="mega">Portfolio</h1>
+              <p class="year" aria-label="2025 to 2026">2026</p>
+            </div>
+          </div>
+
+          <p class="hero-id">
+            <span class="checkbox" aria-hidden="true"></span>VIDEO EDITOR /
+            VISUAL STORYTELLER
+          </p>
+
+          <nav class="menu" aria-label="Main menu">
+            <ul role="menu" id="menu">
+              <li role="none">
+                <button role="menuitem" type="button" data-action="start">
+                  START
+                </button>
+              </li>
+              <li role="none">
+                <button
+                  role="menuitem"
+                  type="button"
+                  data-action="options"
+                  aria-haspopup="dialog"
+                >
+                  OPTIONS
+                </button>
+              </li>
+              <li role="none">
+                <button role="menuitem" type="button" data-action="exit">
+                  EXIT
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          <p class="hint" aria-hidden="true">
+            ↑ ↓ to move &nbsp;·&nbsp; ENTER to select
+          </p>
+        </div>
+      </section>
+      <!-- ============ 3. ABOUT ============ -->
+      <section class="about" id="about" aria-labelledby="about-title">
+        <div class="wrap about-grid">
+          <div class="about-side reveal">
+            <p class="eyebrow">01 — Profile</p>
+            <p class="hello">HELLO, I AM</p>
+            <h2 id="about-title" class="display name">Rehan Khan</h2>
+            <p class="role">Video Editor · Visual Creator</p>
+
+            <!-- Profile photo. Replace with your own: assets/images/profile.jpg -->
+            <figure class="profile-photo" id="profile-photo">
+              <img
+                src="/images/1.jpeg"
+                alt="Portrait of the video editor at work"
+                width="640"
+                height="800"
+                loading="lazy"
+              />
+              <span class="photo-fallback" aria-hidden="true"
+                >YOUR PHOTO<br /><small>assets/images/profile.jpg</small></span
+              >
+            </figure>
+          </div>
+
+          <div class="about-main reveal">
+            <h3 class="label">About Me</h3>
+            <!-- EDIT: replace with your own intro -->
+            <p class="lead">
+              I'm a video editor focused on creating engaging visuals through
+              creative storytelling, smooth transitions, and rhythm-driven
+              edits. I aim to turn simple footage into content that captures
+              attention.
+            </p>
+
+            <div class="cols">
+              <div>
+                <h3 class="label">Specialties</h3>
+                <ul class="ticks">
+                  <li>Short-form &amp; Reels</li>
+                  <li>Commercial &amp; Brand Film</li>
+                  <li>Cinematic Visuals</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="label">Approach</h3>
+                <ol class="steps">
+                  <li><b>Story first.</b> Every cut serves the idea.</li>
+                  <li><b>Rhythm second.</b> Pace and sound drive the edit.</li>
+                  <li>
+                    <b>Polish last.</b> Grade, type and finish with restraint.
+                  </li>
+                </ol>
+              </div>
+            </div>
+
+            <h3 class="label">Software Skills</h3>
+            <ul class="tools" aria-label="Editing tools">
+              <li>Capcut</li>
+              <li>Photocraft</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 2. VIDEO PROJECTS ============ -->
+      <section class="work" id="work" aria-labelledby="work-title">
+        <div class="wrap">
+          <header class="section-head reveal">
+            <p class="eyebrow">02 — <span id="work-count">00</span> projects</p>
+            <h2 id="work-title" class="display">Selected Work</h2>
+            <div
+              class="filters"
+              id="filters"
+              role="group"
+              aria-label="Filter videos by category"
+            ></div>
+          </header>
+
+          <!-- Cards are rendered by script.js from the videoProjects array -->
+          <div class="gallery" id="gallery" aria-live="polite"></div>
+          <p class="gallery-note">
+            Previews are muted loops. Click any video to watch it full size with
+            sound.
+          </p>
+          <p class="gallery-note">
+            Videos are compressed for web hosting, so video quality may differ
+            from the original files.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ 4. CONTACT ============ -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">03 — Contact</p>
+          <h2 id="contact-title" class="display huge reveal">
+            Let’s make something that moves.
+          </h2>
+
+          <!-- EDIT: replace every href and visible text below with your own details -->
+          <ul class="links reveal">
+            <li>
+              <a href="mailto:babirehan59@gmail.com"
+                ><span>Email</span>babirehan59@email.com</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://instagram.com/visualsbyrk._"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span>Instagram</span>visualsbyrk._</a
+              >
+            </li>
+            <!-- <li>
+              <a
+                href="https://youtube.com/@your-channel"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span>YouTube / Vimeo</span>youtube.com/@your-channel</a
+              >
+            </li> -->
+            <li>
+              <a
+                href="https://wa.me/7698257349"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span>WhatsApp</span>+91 76982 57349</a
+              >
+            </li>
+          </ul>
+
+          <p class="thanks reveal" aria-hidden="true">Thank you<br /></p>
+        </div>
+        <footer class="foot">
+          <span>© <span id="year">2026</span> Rehan Khan</span>
+          <a href="#home">Back to top ↑</a>
+        </footer>
+      </section>
+    </main>
+
+    <!-- ============ VIDEO MODAL ============ -->
+    <div
+      class="modal"
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      hidden
+    >
+      <div class="backdrop" data-close></div>
+      <div class="modal-panel">
+        <div class="modal-bar">
+          <div>
+            <p class="modal-cat" id="modal-cat"></p>
+            <h3 class="modal-title" id="modal-title"></h3>
+          </div>
+          <button
+            class="icon-btn"
+            type="button"
+            id="modal-close"
+            aria-label="Close video"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-stage" id="modal-stage">
+          <video
+            id="modal-video"
+            controls
+            playsinline
+            preload="metadata"
+          ></video>
+          <p class="modal-missing" id="modal-missing" hidden>
+            Video file not found.<br /><small id="modal-path"></small>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OPTIONS PANEL ============ -->
+    <div
+      class="modal options"
+      id="options"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="options-title"
+      hidden
+    >
+      <div class="backdrop" data-close></div>
+      <div class="options-panel">
+        <div class="modal-bar">
+          <h3 class="modal-title" id="options-title">Options</h3>
+          <button
+            class="icon-btn"
+            type="button"
+            id="options-close"
+            aria-label="Close options"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="opt-row">
+          <div><b>Sound</b><small>Menu blips on hover and select</small></div>
+          <button
+            class="switch"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            id="opt-sound"
+            aria-label="Sound"
+          >
+            <i></i>
+          </button>
+        </div>
+        <div class="opt-row">
+          <div>
+            <b>Reduced motion</b
+            ><small>Stops previews autoplay and animations</small>
+          </div>
+          <button
+            class="switch"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            id="opt-motion"
+            aria-label="Reduced motion"
+          >
+            <i></i>
+          </button>
+        </div>
+        <div class="opt-row opt-theme">
+          <div><b>Accent</b><small id="accent-name">Crimson</small></div>
+          <div class="swatches" role="radiogroup" aria-label="Accent color">
+            <button
+              type="button"
+              role="radio"
+              aria-checked="true"
+              data-accent="crimson"
+              aria-label="Crimson"
+            ></button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked="false"
+              data-accent="cobalt"
+              aria-label="Cobalt"
+            ></button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked="false"
+              data-accent="silver"
+              aria-label="Silver"
+            ></button>
+          </div>
+        </div>
+        <p class="opt-note">
+          Theme: Midnight navy · Display: Anton / Oswald · Mono: Space Mono
+        </p>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
