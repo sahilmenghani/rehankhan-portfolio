@@ -17,7 +17,10 @@ const videoProjects = [
   { title: "Project Five",  category: "Cinematic",  video: "/videos/5.mp4", poster: "assets/images/project-05-poster.jpg", orientation: "vertical" },
   { title: "Project Six",   category: "Reels",       video: "/videos/6.mp4", poster: "assets/images/project-06-poster.jpg", orientation: "vertical" },
   { title: "Project Seven", category: "Commercial",  video: "/videos/7.mp4", poster: "assets/images/project-07-poster.jpg", orientation: "vertical" },
-  { title: "Project Eight", category: "Cinematic",   video: "/videos/8.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "vertical" }
+  { title: "Project Eight", category: "Cinematic",   video: "/videos/8.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "vertical" },
+  { title: "Project Nine", category: "Cinematic",   video: "/videos/9.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "horizontal" },
+  // { title: "Project Ten", category: "Commercial",   video: "/videos/10.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "vertical" }
+
 ];
 
 /* ---------------- helpers ---------------- */
