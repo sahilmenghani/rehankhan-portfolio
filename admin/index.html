@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Admin</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+  </head>
+
+  <body>
+    <!-- LOGIN -->
+    <div id="loginScreen" class="login-screen">
+      <div class="login-box">
+        <div class="admin-logo">
+          <img src="/images/2.jpeg" alt="Profile photo" />
+        </div>
+
+        <h1>Video Admin</h1>
+        <p>Sign in to manage your video edits.</p>
+
+        <form id="loginForm">
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">LOGIN</button>
+        </form>
+
+        <p id="loginMessage"></p>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="admin-panel hidden">
+      <header class="admin-header">
+        <div>
+          <span class="eyebrow">PORTFOLIO CONTROL</span>
+          <h1>Video Dashboard</h1>
+        </div>
+
+        <div class="header-actions">
+          <a href="../index.html" target="_blank" class="view-site">
+            VIEW SITE ↗
+          </a>
+          <button id="logoutBtn">LOGOUT</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <!-- CATEGORIES -->
+        <section class="admin-section">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">CATEGORIES</span>
+              <h2>Categories</h2>
+            </div>
+
+            <form id="categoryForm" class="inline-form">
+              <input
+                type="text"
+                id="categoryName"
+                placeholder="New category name"
+                maxlength="40"
+                required
+              />
+              <button type="submit" class="add-btn">+ ADD CATEGORY</button>
+            </form>
+          </div>
+
+          <div id="categoriesList" class="category-list"></div>
+        </section>
+
+        <!-- VIDEOS -->
+        <section class="admin-section">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">VIDEOS</span>
+              <h2>Video Editing</h2>
+            </div>
+
+            <button class="add-btn" onclick="openVideoProjectForm()">
+              + ADD VIDEO
+            </button>
+          </div>
+
+          <div id="videoProjectsList"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div class="modal hidden" id="videoProjectModal">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeVideoProjectForm()">✕</button>
+
+        <span class="eyebrow">VIDEO EDIT</span>
+        <h2 id="videoModalTitle">Add Video Edit</h2>
+
+        <form id="videoProjectForm">
+          <input type="hidden" id="videoProjectId" />
+
+          <label for="videoTitle">Video Title</label>
+          <input
+            type="text"
+            id="videoTitle"
+            placeholder="My Latest Edit"
+            required
+          />
+
+          <label for="videoCategory">Category</label>
+          <select id="videoCategory" required></select>
+
+          <label for="videoFile">Video File</label>
+          <input type="file" id="videoFile" accept="video/*" />
+          <div id="videoDetected" class="current-file"></div>
+
+          <label for="videoOrientation">Ratio</label>
+          <select id="videoOrientation">
+            <option value="horizontal">16:9 — Horizontal</option>
+            <option value="vertical">9:16 — Vertical</option>
+          </select>
+
+          <label for="posterFile">Thumbnail (optional)</label>
+          <input type="file" id="posterFile" accept="image/*" />
+          <div class="current-file">
+            Leave empty to use a frame from the video automatically.
+          </div>
+
+          <label for="videoOrder">Display order</label>
+          <input type="number" id="videoOrder" value="0" step="1" />
+          <div class="current-file">
+            Lower numbers show first. Same number = newest first.
+          </div>
+
+          <div id="videoCurrent" class="current-file"></div>
+
+          <button type="submit" class="save-main" id="videoSaveBtn">
+            SAVE VIDEO
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/admin/config.js"></script>
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

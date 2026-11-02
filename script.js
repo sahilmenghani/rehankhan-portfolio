@@ -1,27 +1,69 @@
 /* ==========================================================
-   VIDEO EDITOR PORTFOLIO — all content is local, no backend.
+   VIDEO EDITOR PORTFOLIO — projects come from Supabase (admin panel).
    ========================================================== */
 
 /* ----------------------------------------------------------
-   EDIT YOUR VIDEOS HERE.
-   - video:       path to your file inside assets/videos/
-   - poster:      path to a thumbnail inside assets/images/
+   FALLBACK LIST — only used if Supabase can't be reached
+   (not configured yet, offline, or an error). Normal use: add
+   videos in /admin instead, this list is then ignored.
    - orientation: "vertical" (9:16) or "horizontal" (16:9)
-   Add or remove objects freely; the gallery rebuilds itself.
    ---------------------------------------------------------- */
-const videoProjects = [
-  { title: "Project One",   category: "Commercial",  video: "/videos/1.mp4", poster: "assets/images/project-01-poster.jpg", orientation: "vertical" },
-  { title: "Project Two",   category: "Commercial",  video: "/videos/2.mp4", poster: "assets/images/project-02-poster.jpg", orientation: "horizontal" },
-  { title: "Project Three", category: "Cinematic",   video: "/videos/3.mp4", poster: "assets/images/project-03-poster.jpg", orientation: "vertical" },
-  { title: "Project Four",  category: "Cinematic", video: "/videos/4.mp4", poster: "assets/images/project-04-poster.jpg", orientation: "vertical" },
-  { title: "Project Five",  category: "Cinematic",  video: "/videos/5.mp4", poster: "assets/images/project-05-poster.jpg", orientation: "vertical" },
-  { title: "Project Six",   category: "Reels",       video: "/videos/6.mp4", poster: "assets/images/project-06-poster.jpg", orientation: "vertical" },
-  { title: "Project Seven", category: "Commercial",  video: "/videos/7.mp4", poster: "assets/images/project-07-poster.jpg", orientation: "vertical" },
-  { title: "Project Eight", category: "Cinematic",   video: "/videos/8.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "vertical" },
-  { title: "Project Nine", category: "Cinematic",   video: "/videos/9.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "horizontal" },
-  // { title: "Project Ten", category: "Commercial",   video: "/videos/10.mp4", poster: "assets/images/project-08-poster.jpg", orientation: "vertical" }
+const fallbackProjects = [
+  { title: "Project One",   category: "Commercial",  video: "/videos/1.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Two",   category: "Commercial",  video: "/videos/2.mp4", poster: "", orientation: "horizontal" },
+  { title: "Project Three", category: "Cinematic",   video: "/videos/3.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Four",  category: "Cinematic", video: "/videos/4.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Five",  category: "Cinematic",  video: "/videos/5.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Six",   category: "Reels",       video: "/videos/6.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Seven", category: "Commercial",  video: "/videos/7.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Eight", category: "Cinematic",   video: "/videos/8.mp4", poster: "", orientation: "vertical" },
+  { title: "Project Nine", category: "Cinematic",   video: "/videos/9.mp4", poster: "", orientation: "horizontal" },
+   { title: "Project Ten", category: "Commercial",   video: "/videos/10.mp4", poster: "", orientation: "vertical" },
+   { title: "Project eleven", category: "Commercial",   video: "", poster: "", orientation: "vertical" }
 
 ];
+
+let videoProjects = [];
+
+/* ---------------- load from Supabase ---------------- */
+function getSupabase() {
+  try {
+    return typeof supabaseClient !== "undefined" ? supabaseClient : null;
+  } catch (e) {
+    return null; // config.js failed to run
+  }
+}
+
+/* returns { projects, fromSupabase } */
+async function loadProjects() {
+  const client = getSupabase();
+  if (!client) return { projects: fallbackProjects, fromSupabase: false };
+
+  try {
+    const { data, error } = await client
+      .from("video_projects")
+      .select("id, title, video_url, poster_url, orientation, sort_order, created_at, category:categories(name, sort_order)");
+    if (error) throw error;
+console.log("SUPABASE PROJECTS:", data);
+    const projects = (data || [])
+      .filter(r => r.video_url)
+      .sort((a, b) =>
+        (a.sort_order || 0) - (b.sort_order || 0) ||
+        new Date(b.created_at) - new Date(a.created_at))
+      .map(r => ({
+        title: r.title || "Untitled",
+        category: (r.category && r.category.name) || "Uncategorized",
+        categoryOrder: r.category ? (r.category.sort_order || 0) : 9999,
+        video: r.video_url,
+        poster: r.poster_url || "",
+        orientation: r.orientation === "vertical" ? "vertical" : "horizontal"
+      }));
+    return { projects, fromSupabase: true };
+  } catch (e) {
+    console.warn("Could not load projects from Supabase, using fallback list.", e);
+    return { projects: fallbackProjects, fromSupabase: false };
+  }
+}
 
 /* ---------------- helpers ---------------- */
 const $  = (sel, ctx = document) => ctx.querySelector(sel);
@@ -101,6 +143,9 @@ let modalOpen = false;
 
 function buildGallery() {
   gallery.innerHTML = "";
+  if (!videoProjects.length) {
+    gallery.innerHTML = '<p class="gallery-note">No projects yet — check back soon.</p>';
+  }
   videoProjects.forEach((p, i) => {
     const num = String(i + 1).padStart(2, "0");
     const card = document.createElement("figure");
@@ -203,7 +248,8 @@ document.addEventListener("visibilitychange", syncAll);
 /* ---------------- filters ---------------- */
 function buildFilters() {
   const wrap = $("#filters");
-  const cats = ["All", ...new Set(videoProjects.map(p => p.category))];
+  const ordered = [...videoProjects].sort((a, b) => (a.categoryOrder || 0) - (b.categoryOrder || 0));
+  const cats = ["All", ...new Set(ordered.map(p => p.category))];
   wrap.innerHTML = "";
   cats.forEach((c, i) => {
     const b = document.createElement("button");
@@ -392,5 +438,8 @@ $$(".reveal").forEach(el => revealObserver.observe(el));
 /* ---------------- init ---------------- */
 $("#year").textContent = new Date().getFullYear();
 applyPrefs();
-buildFilters();
-buildGallery();
+loadProjects().then(({ projects }) => {
+  videoProjects = projects;
+  buildFilters();
+  buildGallery();
+});
