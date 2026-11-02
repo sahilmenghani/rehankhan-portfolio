@@ -376,9 +376,10 @@ function openVideoProjectForm() {
 function closeVideoProjectForm() {
   document.getElementById("videoProjectModal").classList.add("hidden");
 }
-
 function editVideoProject(id) {
-  const video = currentVideoProjects.find((item) => item.id === id);
+  const video = currentVideoProjects.find(
+    (item) => String(item.id) === String(id)
+  );
   if (!video) return;
 
   openVideoProjectForm();
@@ -589,10 +590,11 @@ async function saveVideoProject(event) {
       return;
     }
 
-    const existing = id
-      ? currentVideoProjects.find((item) => item.id === id)
-      : null;
-
+ const existing = id
+  ? currentVideoProjects.find(
+      (item) => String(item.id) === String(id)
+    )
+  : null;
     saveBtn.disabled = true;
 
     let videoUrl = null;
@@ -664,9 +666,9 @@ async function saveVideoProject(event) {
 
 async function deleteVideoProject(id) {
   if (!confirm("Delete this video?")) return;
-
-  const existing = currentVideoProjects.find((item) => item.id === id);
-
+const existing = currentVideoProjects.find(
+  (item) => String(item.id) === String(id)
+);
   const { error } = await supabaseClient
     .from("video_projects")
     .delete()
